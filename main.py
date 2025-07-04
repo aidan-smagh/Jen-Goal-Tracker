@@ -13,6 +13,7 @@ headers = []
 #data is a list containing other lists which are each line in the csv file
 data = []
 
+
 #read from the csv file
 def read_csv(file_name):
     with open(name, mode = 'r') as file:
@@ -33,19 +34,33 @@ read_csv(name)
 #print(headers)
 #print(data)
 
+#get the desired school
+school = input("Which school's data would you like to view? (BHS, GHS, YHS, THS, YRA, QLMS, GMS, TMS, YMS)\n>")
+
 n = 0
 schools = []
-for school in data:
+for i in data:
     schools.append(data[n][2])
     n = n + 1
 
-progress = 1
+#grab the correct school   
+if school in schools:
+    subject = school
+else:
+    print("Invalid school entered, please try again.")
 
-def dataForGraph():
-    plt.title("Progress Report")
-    plt.xlabel("Schools")
-    plt.ylabel("Progress")
-    plt.bar(schools, progress)
+#progress towards completion nums
+progress = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+#different types of goals
+activity = ["Class Presentation", "Career Day/Fair", "Career Cafe", "Career Panel", "Family Engagement", "Field Trip/Industry Tour", "Guest Speaker", "Meet the Professional", "Mock Interview"]
+
+def graph():
+    plt.title(subject + " Progress Report")
+    plt.xlabel("Activity")
+    plt.ylabel("Progress (in percent)")
+    plt.yticks([0, 25, 50, 75, 100])
+    plt.bar(activity, progress)
     plt.show()
 
-dataForGraph()
+graph()
