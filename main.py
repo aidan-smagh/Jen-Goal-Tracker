@@ -13,7 +13,28 @@ headers = []
 #data is a list containing other lists which are each line in the csv file
 data = []
 
+#progress towards completion nums
+progress = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
+#different types of goals and num of each required (these two work together)
+activity = ["Class Presentation", "Career Day/Fair", "Career Cafe", "Career Panel", "Family Engagement", "Field Trip/Industry Tour", "Guest Speaker", "Meet the Professional", "Mock Interview"]
+numRequired = [9, 1, 34, 4, 5, 4, 9, 4, 1]
+
+#combine them into a dictionary
+numForEachActivity = {}
+n = 0
+for i in activity:
+    numForEachActivity[activity[n]] = numRequired[n]
+    n = n + 1
+
+#keep track of progress so far
+numActual = {}
+n = 0
+for i in activity:
+    numActual[activity[n]] = 0
+    n = n + 1
+
+#print(numActual)
 #read from the csv file
 def read_csv(file_name):
     with open(name, mode = 'r') as file:
@@ -49,12 +70,18 @@ if school in schools:
 else:
     print("Invalid school entered, please try again.")
 
-#progress towards completion nums
-progress = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+#track data completion
+n = 0
+for i in data:
+    if subject == data[n][2]:
+        print(data[n][1])
+        numActual[data[n][1]] += 1
+        n = n + 1
+    else:
+        print("not")
+        n = n + 1
 
-#different types of goals
-activity = ["Class Presentation", "Career Day/Fair", "Career Cafe", "Career Panel", "Family Engagement", "Field Trip/Industry Tour", "Guest Speaker", "Meet the Professional", "Mock Interview"]
-
+print(numActual)
 def graph():
     plt.title(subject + " Progress Report")
     plt.xlabel("Activity")
