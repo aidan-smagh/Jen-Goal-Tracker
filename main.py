@@ -81,13 +81,30 @@ for i in data:
         print("not")
         n = n + 1
 
-print(numActual)
+def getProgressNums():
+    realProgress = []
+    for key in numActual.keys():
+        realProgress.append(numActual[key])
+    print(realProgress)
+    n = 0
+    finalProgress = []
+    for i in realProgress:
+        finalProgress.append(realProgress[n] / numRequired[n])
+        n = n + 1
+
+    return finalProgress 
+
+print(getProgressNums())
+#print(numActual)
+
 def graph():
+    plt.figure(figsize = (14, 6))
     plt.title(subject + " Progress Report")
     plt.xlabel("Activity")
-    plt.ylabel("Progress (in percent)")
-    plt.yticks([0, 25, 50, 75, 100])
-    plt.bar(activity, progress)
+    plt.ylabel("Progress")
+    plt.ylim(0, 1.0)
+    plt.yticks(np.arange(0, 1.25, 0.25))
+    plt.bar(activity, getProgressNums())
     plt.show()
 
 graph()
