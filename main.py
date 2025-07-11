@@ -1,3 +1,5 @@
+#this program reads from a csv file as a command line argument and constructs a bar graph based on the data in the file
+
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
@@ -5,7 +7,6 @@ import sys
 
 #command line arguments for dynamic file names
 name = sys.argv[1]
-#print(name)
 
 #headers is a list of the first line in the csv file
 headers = []
@@ -34,7 +35,6 @@ for i in activity:
     numActual[activity[n]] = 0
     n = n + 1
 
-#print(numActual)
 #read from the csv file
 def read_csv(file_name):
     with open(name, mode = 'r') as file:
@@ -52,12 +52,11 @@ def read_csv(file_name):
                 n = n + 1
 
 read_csv(name)
-#print(headers)
-#print(data)
 
 #get the desired school
 school = input("Which school's data would you like to view? (BHS, GHS, YHS, THS, YRA, QLMS, GMS, TMS, YMS)\n>")
 
+#gets a list of all schools in the provided csv file
 n = 0
 schools = []
 for i in data:
@@ -94,8 +93,6 @@ def getProgressNums():
 
     return finalProgress 
 
-print(getProgressNums())
-#print(numActual)
 
 def graph():
     plt.figure(figsize = (14, 6))
