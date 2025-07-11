@@ -1,5 +1,3 @@
-#this program reads from a csv file as a command line argument and constructs a bar graph based on the data in the file
-
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
@@ -42,7 +40,6 @@ def read_csv(file_name):
         n = 0
         for lines in csvFile:
             if (n == 0):
-                #print(lines)
                 global headers
                 headers = lines
                 n = n + 1
@@ -58,10 +55,9 @@ school = input("Which school's data would you like to view? (BHS, GHS, YHS, THS,
 
 #gets a list of all schools in the provided csv file
 n = 0
-schools = []
-for i in data:
-    schools.append(data[n][2])
-    n = n + 1
+schools = ["BHS", "GHS", "YHS", "THS", "YRA", "QLMS", "GMS", "TMS", "YMS"]
+#for i in data:
+#    n = n + 1
 
 #grab the correct school   
 if school in schools:
@@ -73,18 +69,16 @@ else:
 n = 0
 for i in data:
     if subject == data[n][2]:
-        print(data[n][1])
         numActual[data[n][1]] += 1
         n = n + 1
     else:
-        print("not")
         n = n + 1
 
+#reads from the dictionary and gets the percentage towards completion value
 def getProgressNums():
     realProgress = []
     for key in numActual.keys():
         realProgress.append(numActual[key])
-    print(realProgress)
     n = 0
     finalProgress = []
     for i in realProgress:
@@ -93,7 +87,7 @@ def getProgressNums():
 
     return finalProgress 
 
-
+#constructs the bar graph
 def graph():
     plt.figure(figsize = (14, 6))
     plt.title(subject + " Progress Report")
